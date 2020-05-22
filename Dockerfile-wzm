@@ -1,4 +1,0 @@
-FROM drone-kubernetes:latest
-RUN chmod -R 777 /bin
-ENTRYPOINT ["/bin/bash"]
-CMD ["/bin/update.sh"]
