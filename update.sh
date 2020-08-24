@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo namespace ${PLUGIN_NAMESPACE}
+echo deployment ${PLUGIN_DEPLOYMENT}
+echo container ${PLUGIN_CONTAINER}
+echo repo ${PLUGIN_REPO}
+echo tag ${PLUGIN_TAG}
+
 if [ -z ${PLUGIN_NAMESPACE} ]; then
   PLUGIN_NAMESPACE="default"
 fi
@@ -33,6 +39,8 @@ kubectl config set-context default --cluster=default --user=${PLUGIN_KUBERNETES_
 kubectl config use-context default
 
 echo Deploying to $KUBERNETES_SERVER
+
+echo kubectl -n ${PLUGIN_NAMESPACE} set image deployment/${PLUGIN_DEPLOYMENT} ${PLUGIN_CONTAINER}=${PLUGIN_REPO}:${PLUGIN_TAG} --record
 
 kubectl -n ${PLUGIN_NAMESPACE} set image deployment/${PLUGIN_DEPLOYMENT} \
       ${PLUGIN_CONTAINER}=${PLUGIN_REPO}:${PLUGIN_TAG} --record
