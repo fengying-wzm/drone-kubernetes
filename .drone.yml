@@ -1,0 +1,20 @@
+kind: pipeline
+name: default
+type: kubernetes
+
+steps:
+
+  - name: docker_build
+    image: harbor.likeshuo.group/library/docker:latest
+    pull: if-not-exists
+    settings:
+      username:
+        from_secret: docker_user
+      password:
+        from_secret: docker_password
+      repo: harbor.likeshuo.group/library/drone-kubernetes
+      registry: harbor.likeshuo.group
+      insecure: true
+      debug: true
+      tag: v1.0
+      
